@@ -22,7 +22,7 @@ public class SpawnObstacles : MonoBehaviour
         for (int i=0; i<numberOfObstacles; i++)
         {
             spawnPosition.x = Random.Range(minX, maxX);
-            spawnPosition.z = Random.Range(this.transform.position.z, this.transform.Find("End").position.z/2);
+            spawnPosition.z = Random.Range(this.transform.position.z, this.transform.Find("End").position.z);
             Instantiate(obstacle, spawnPosition, Quaternion.identity);
         }
 
