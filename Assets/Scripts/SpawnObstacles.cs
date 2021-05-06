@@ -2,20 +2,30 @@ using UnityEngine;
 
 public class SpawnObstacles : MonoBehaviour
 {
+    [SerializeField] private int minNumberOfObstacles = 1;
+    [SerializeField] private int maxNumberOfObstacles = 4;
 
-    public GameObject[] obstacles;
-    private Vector3 position;
+    public Transform obstacle;
+    private Vector3 spawnPosition;
     
+    private int numberOfObstacles;
+    private int minX = -4;
+    private int maxX = 4;
+  
+
+
     private void Start()
     {
-        position.y = 0.57f;
-        foreach (var obs in obstacles)
+        numberOfObstacles = Random.Range(minNumberOfObstacles, maxNumberOfObstacles);
+        spawnPosition.y = obstacle.position.y;
+
+        for (int i=0; i<numberOfObstacles; i++)
         {
-            position.x = Random.Range(-4,4);
-            position.z = Random.Range(-25,6);
-            Instantiate(obs, position, Quaternion.identity);
+            spawnPosition.x = Random.Range(minX, maxX);
+            spawnPosition.z = Random.Range(this.transform.position.z, this.transform.Find("End").position.z/2);
+            Instantiate(obstacle, spawnPosition, Quaternion.identity);
         }
-        
+
     }
 
 }

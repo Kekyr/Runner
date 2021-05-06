@@ -1,26 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float swipeRange;
-    [SerializeField] private Vector3 swipeForce;
+    [SerializeField] private Vector3 turnForce;
 
     public Text hpText;
     private Rigidbody rigidbody;
-    private Vector3 speed;
+    private Vector3 speed=new Vector3(0,0,50f);
     private int hp = 3;
     private bool damage=true;
-    
     
 
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
     }
-
 
     private void FixedUpdate()
     {
@@ -39,12 +35,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveRight()
     {
-        Move(swipeForce);
+        Move(turnForce);
     }
 
     public void MoveLeft()
     {
-        Move(-swipeForce);
+        Move(-turnForce);
     }
 
     private void OnCollisionEnter(Collision collision)
