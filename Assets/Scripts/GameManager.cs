@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform pieceOfRoad;
-    public Transform player;
+    public Transform PieceOfRoad;
+    public Transform Player;
 
-    private Vector3 lastEnd;
-    private float playerDistance = 150f;
+    private Vector3 _lastEnd;
+    private float _playerDistance = 150f;
     
     private void Start()
     {
-        SpawnPieceOfRoad(pieceOfRoad.position);
-        lastEnd = pieceOfRoad.Find("End").position;
+        SpawnPieceOfRoad(PieceOfRoad.position);
+        _lastEnd = PieceOfRoad.Find("End").position;
     }
 
     private void Update()
     {
-        if(Vector3.Distance(player.position,lastEnd)<playerDistance)
+        if(Vector3.Distance(Player.position,_lastEnd)<_playerDistance)
         {
             SpawnPieceOfRoad();
         }
@@ -24,13 +24,13 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPieceOfRoad()
     {
-        Transform lastPieceOfRoad = SpawnPieceOfRoad(lastEnd);
-        lastEnd = lastPieceOfRoad.Find("End").position;
+        Transform lastPieceOfRoad = SpawnPieceOfRoad(_lastEnd);
+        _lastEnd = lastPieceOfRoad.Find("End").position;
     }
     
     private Transform SpawnPieceOfRoad(Vector3 spawnPosition)
     {
-        Transform lastPieceOfRoad=Instantiate(pieceOfRoad, spawnPosition, Quaternion.identity);
+        Transform lastPieceOfRoad=Instantiate(PieceOfRoad, spawnPosition, Quaternion.identity);
         return lastPieceOfRoad;
     }
 

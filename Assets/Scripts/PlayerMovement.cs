@@ -4,67 +4,67 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Vector3 turnForce;
+    [SerializeField] private Vector3 _turnForce;
 
-    public Text hpText;
-    private Rigidbody rigidbody;
-    private Vector3 speed=new Vector3(0,0,50f);
-    private int hp = 3;
-    private bool damage=true;
+    public Text HpText;
+    private Rigidbody _rigidbody;
+    private Vector3 _speed=new Vector3(0,0,50f);
+    private int _hp = 3;
+    private bool _damage=true;
     
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        Move(speed);
+        Move(_speed);
     }
 
     private void Move(Vector3 force)
     {
-        rigidbody.AddForce(force);
+        _rigidbody.AddForce(force);
     }
 
     public void ChangeSpeed(Slider slider)
     {
-        speed.z = slider.value;
+        _speed.z = slider.value;
     }
 
     public void MoveRight()
     {
-        Move(turnForce);
+        Move(_turnForce);
     }
 
     public void MoveLeft()
     {
-        Move(-turnForce);
+        Move(-_turnForce);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Wall"))
         {
-            if(damage)
+            if(_damage)
             {
-                hp -= 1;
-                hpText.text = "HP: " + hp;
+                _hp -= 1;
+                HpText.text = "HP: " + _hp;
                 StartCoroutine(Delay());
             }
         }
         else if(collision.gameObject.CompareTag("Obstacle"))
         {
-            hp -= 1;
-            hpText.text = "HP: " + hp;
+            _hp -= 1;
+            HpText.text = "HP: " + _hp;
         }
     }
 
     private IEnumerator Delay()
     {
-        damage = false;
+        _damage = false;
         yield return new WaitForSeconds(10f);
-        damage = true;
+        _damage = true;
     }
 }
